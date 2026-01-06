@@ -236,13 +236,6 @@
         <img id="lightbox-img" src="" alt="Fullscreen Image">
     </div>
 
-    <!-- Theme Toggle -->
-    <button id="themeToggle"
-        class="fixed top-4 right-4 z-50 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg">
-        <span class="material-symbols-outlined text-gray-800 dark:text-white">
-            dark_mode
-        </span>
-    </button>
 
     <!-- Navigation -->
     <header
@@ -279,10 +272,21 @@
                     <span class="truncate">Get in Touch</span>
                 </a>
 
-                <!-- Mobile menu button -->
-                <button id="mobileMenuButton" class="md:hidden p-2 text-gray-600 dark:text-gray-300">
-                    <span class="material-symbols-outlined">menu</span>
-                </button>
+                <!-- Mobile controls -->
+                <div class="flex items-center gap-2">
+                    <!-- Theme Toggle -->
+                    <button id="themeToggle"
+                        class="p-2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg">
+                        <span class="material-symbols-outlined text-gray-800 dark:text-white">
+                            dark_mode
+                        </span>
+                    </button>
+
+                    <!-- Mobile menu button -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 text-gray-600 dark:text-gray-300">
+                        <span class="material-symbols-outlined text-2xl">menu</span>
+                    </button>
+                </div>
             </div>
 
             <!-- Mobile menu -->
