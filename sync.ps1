@@ -23,7 +23,7 @@ $Action = {
         Set-Location "E:\WEB AND APP DEVELOPMENT\WebSites\Romuths Graphic Designing"
         git add .
         git commit -m "Auto-sync: $Timestamp"
-        git push origin master
+        git push origin main
         Write-Host "[$Timestamp] Successfully pushed to GitHub!" -ForegroundColor Green
     } catch {
         Write-Host "[$Timestamp] Error syncing to GitHub: $_" -ForegroundColor Red
