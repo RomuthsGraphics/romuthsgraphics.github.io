@@ -202,6 +202,95 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #2cc86a;
         }
+
+        /* About Section — Modern Styles */
+        .about-dot-pattern {
+            background-image: radial-gradient(circle, #36e27b33 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .about-pull-quote {
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 3px solid #36e27b;
+            font-style: italic;
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #36e27b;
+        }
+
+        .dark .about-pull-quote {
+            color: #5ef099;
+        }
+
+        .about-stat-card {
+            background: rgba(54, 226, 123, 0.06);
+            border: 1px solid rgba(54, 226, 123, 0.15);
+            transition: transform 0.35s cubic-bezier(.22, 1, .36, 1), box-shadow 0.35s ease;
+        }
+
+        .about-stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px -8px rgba(54, 226, 123, 0.25);
+        }
+
+        .about-hero-img-wrapper {
+            position: relative;
+        }
+
+        .about-hero-img-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 1.25rem;
+            background: linear-gradient(135deg, #36e27b, #3b82f6, #2cc86a);
+            background-size: 300% 300%;
+            animation: gradient-rotate 4s ease infinite;
+            z-index: 0;
+            opacity: 0.7;
+        }
+
+        .about-hero-img-wrapper img {
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-bento-card {
+            transition: transform 0.4s cubic-bezier(.22, 1, .36, 1), box-shadow 0.4s ease;
+        }
+
+        .about-bento-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px -8px rgba(54, 226, 123, 0.2);
+        }
+
+        .about-step-number {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, rgba(54, 226, 123, 0.15), transparent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: absolute;
+            top: 0.75rem;
+            right: 1rem;
+        }
+
+        .testimonial-card-modern {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-card-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #36e27b, #3b82f6);
+        }
     </style>
     <script>
         function filterPortfolio() {
@@ -428,157 +517,273 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="page-section hidden bg-gray-50 dark:bg-gray-900/50">
+        <section id="about" class="page-section hidden">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-                <div class="flex flex-col gap-16">
-                    <!-- Hero Section -->
-                    <div class="@container">
-                        <div
-                            class="flex flex-col gap-6 px-4 py-10 @[480px]:gap-8 @[864px]:flex-row @[864px]:items-center">
-                            <div class="flex-none flex justify-center @[864px]:justify-start">
+                <div class="flex flex-col gap-20">
+
+                    <!-- ==================== HERO INTRO — SPLIT LAYOUT ==================== -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                        <!-- Left: Large Image with Gradient Border -->
+                        <div class="flex justify-center lg:justify-start">
+                            <div class="about-hero-img-wrapper rounded-2xl">
                                 <img src="works/about_romuths.jpg" alt="Professional headshot of the designer"
-                                    class="w-40 h-40 object-cover object-top rounded-xl shadow-lg"
-                                    style="width: 160px; height: 160px;" loading="lazy">
+                                    class="w-72 h-80 sm:w-80 sm:h-96 object-cover object-top rounded-2xl shadow-2xl"
+                                    loading="lazy">
                             </div>
-                                <div class="flex flex-1 flex-col gap-6 @[864px]:justify-center">
-                                    <div class="flex flex-col gap-3 text-left">
-                                        <h1
-                                            class="text-gray-900 dark:text-white text-4xl font-black leading-tight tracking-tight sm:text-5xl">
-                                            Behind Romuths Graphics</h1>
-                                        <p
-                                            class="text-gray-700 dark:text-white/70 text-base font-normal leading-relaxed sm:text-lg">
-                                            I'm a Blantyre-based designer turning ideas into bold visuals for brands,
-                                            events, and digital products across Malawi and beyond.</p>
-                                        <p
-                                            class="text-gray-700 dark:text-white/70 text-sm sm:text-base leading-relaxed max-w-xl">
-                                            From quick social media pieces to full brand identities, every project is
-                                            treated like a story that deserves clarity, creativity, and excellence.</p>
-                                    </div>
-                                </div>
+                        </div>
+                        <!-- Right: Intro Text -->
+                        <div class="flex flex-col gap-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-1 bg-primary rounded-full"></div>
+                                <span class="text-primary text-sm font-semibold tracking-widest uppercase">About
+                                    Me</span>
+                            </div>
+                            <h1
+                                class="text-gray-900 dark:text-white text-4xl sm:text-5xl lg:text-[3.25rem] font-black leading-[1.1] tracking-tight">
+                                Behind Romuths
+                                <span class="text-primary">Graphics</span>
+                            </h1>
+                            <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+                                I'm a Blantyre-based designer turning ideas into bold visuals for brands,
+                                events, and digital products across Malawi and beyond.
+                            </p>
+                            <p class="text-gray-500 dark:text-gray-400 text-base leading-relaxed">
+                                From quick social media pieces to full brand identities, every project is
+                                treated like a story that deserves clarity, creativity, and excellence.
+                            </p>
+                            <div class="flex flex-wrap gap-3 mt-2">
+                                <a href="#contact"
+                                    class="flex items-center gap-2 rounded-full h-12 px-7 bg-primary text-white text-sm font-bold tracking-wide hover:bg-primary-dark transition-all hover:scale-105 shadow-lg shadow-primary/25">
+                                    <span class="material-symbols-outlined text-lg">mail</span>
+                                    Let's Talk
+                                </a>
+                                <a href="#services"
+                                    class="flex items-center gap-2 rounded-full h-12 px-7 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-bold tracking-wide hover:border-primary hover:text-primary dark:hover:border-primary dark:hover:text-primary transition-all">
+                                    <span class="material-symbols-outlined text-lg">grid_view</span>
+                                    View Work
+                                </a>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- My Story Section -->
-                    <section class="px-4">
+                    <!-- ==================== STATS BAR ==================== -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="about-stat-card rounded-2xl p-6 text-center backdrop-blur-sm">
+                            <p class="text-3xl sm:text-4xl font-black text-primary">8+</p>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm font-medium mt-1">Years Experience</p>
+                        </div>
+                        <div class="about-stat-card rounded-2xl p-6 text-center backdrop-blur-sm">
+                            <p class="text-3xl sm:text-4xl font-black text-primary">200+</p>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm font-medium mt-1">Projects Delivered</p>
+                        </div>
+                        <div class="about-stat-card rounded-2xl p-6 text-center backdrop-blur-sm">
+                            <p class="text-3xl sm:text-4xl font-black text-primary">50+</p>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm font-medium mt-1">Happy Clients</p>
+                        </div>
+                        <div class="about-stat-card rounded-2xl p-6 text-center backdrop-blur-sm">
+                            <p class="text-3xl sm:text-4xl font-black text-primary">100%</p>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm font-medium mt-1">Satisfaction</p>
+                        </div>
+                    </div>
+
+                    <!-- ==================== STORY / BIO — WITH PULL QUOTE ==================== -->
+                    <div class="relative">
+                        <!-- Decorative dot pattern -->
                         <div
-                            class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center bg-white/80 dark:bg-black/20 rounded-xl p-8">
-                            <div class="md:col-span-1 flex justify-center">
-                                <div class="w-40 h-40 bg-top bg-no-repeat bg-cover rounded-lg"
-                                    data-alt="Professional headshot of the designer, smiling lightly"
-                                    style='background-image: url("works/about_romuths.jpg"); width: 160px; height: 160px;'>
+                            class="absolute -top-10 -right-10 w-40 h-40 about-dot-pattern rounded-full opacity-40 pointer-events-none hidden lg:block">
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
+                            <!-- Main Bio Text -->
+                            <div class="lg:col-span-3 flex flex-col gap-6">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-1 bg-primary rounded-full"></div>
+                                    <span class="text-primary text-sm font-semibold tracking-widest uppercase">My
+                                        Story</span>
                                 </div>
-                            </div>
-                            <div class="md:col-span-4 flex flex-col gap-4">
-                                <h1
-                                    class="text-gray-900 dark:text-white text-[32px] font-bold leading-tight tracking-tight">
-                                    About Romuths</h1>
-                                <p class="text-gray-700 dark:text-gray-300 text-base font-normal leading-relaxed">I'm a
-                                    passionate graphic designer with over 8 years of experience, specializing in
+                                <h2
+                                    class="text-gray-900 dark:text-white text-3xl sm:text-4xl font-bold leading-tight tracking-tight">
+                                    About Romuths
+                                </h2>
+                                <p class="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
+                                    I'm a passionate graphic designer with over 8 years of experience, specializing in
                                     creating powerful visual identities and user-centric digital experiences. My design
                                     philosophy is rooted in clear communication and creative problem-solving to help
-                                    brands connect with their audience.</p>
-                                <p class="text-gray-700 dark:text-gray-300 text-base font-normal leading-relaxed">From
-                                    early sketches in a notepad to launching full-scale digital campaigns, my journey
+                                    brands connect with their audience.
+                                </p>
+                                <p class="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
+                                    From early sketches in a notepad to launching full-scale digital campaigns, my
+                                    journey
                                     has been driven by a single belief: great design is about communication, not just
                                     decoration. I thrive on collaborating with clients to uncover their unique story and
-                                    translate it into a visual language that resonates with their audience.</p>
+                                    translate it into a visual language that resonates with their audience.
+                                </p>
+                            </div>
+                            <!-- Pull Quote -->
+                            <div class="lg:col-span-2 flex flex-col justify-center">
+                                <div
+                                    class="bg-white/60 dark:bg-white/5 rounded-2xl p-8 border border-black/5 dark:border-white/10 shadow-sm">
+                                    <span class="text-6xl leading-none text-primary/30 font-serif">&ldquo;</span>
+                                    <p class="about-pull-quote mt-[-1rem]">
+                                        Great design is about communication, not just decoration.
+                                    </p>
+                                    <div class="mt-6 flex items-center gap-3">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                                            <span class="text-primary font-bold text-sm">RG</span>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-900 dark:text-white text-sm font-bold">Romuths Graphics
+                                            </p>
+                                            <p class="text-gray-500 dark:text-gray-400 text-xs">Design Philosophy</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
 
-                    <!-- FeatureSection / Philosophy -->
-                    <section class="flex flex-col gap-10 px-4 py-10 @container">
-                        <div class="flex flex-col gap-4">
+                    <!-- ==================== DESIGN PHILOSOPHY — BENTO GRID ==================== -->
+                    <section>
+                        <div class="flex flex-col gap-4 mb-10">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-1 bg-primary rounded-full"></div>
+                                <span
+                                    class="text-primary text-sm font-semibold tracking-widest uppercase">Process</span>
+                            </div>
                             <h2
-                                class="text-gray-900 dark:text-white tracking-tight text-3xl font-bold leading-tight max-w-[720px]">
-                                My Design Philosophy & Process</h2>
-                            <p
-                                class="text-gray-700 dark:text-white/70 text-base font-normal leading-normal max-w-[720px]">
+                                class="text-gray-900 dark:text-white tracking-tight text-3xl sm:text-4xl font-bold leading-tight max-w-xl">
+                                My Design Philosophy &amp; Process
+                            </h2>
+                            <p class="text-gray-500 dark:text-gray-400 text-base leading-relaxed max-w-xl">
                                 Every project is guided by a core set of principles to ensure the final product is not
-                                only beautiful but also effective and user-centric.</p>
+                                only beautiful but also effective and user-centric.
+                            </p>
                         </div>
-                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                            <!-- Card 1: Discover -->
                             <div
-                                class="flex flex-1 gap-4 rounded-xl border border-black/10 dark:border-white/10 bg-white/50 dark:bg-white/5 p-6 flex-col">
-                                <div class="text-primary"><span
-                                        class="material-symbols-outlined !text-4xl">travel_explore</span></div>
-                                <div class="flex flex-col gap-1">
-                                    <h3 class="text-gray-900 dark:text-white text-lg font-bold">Discover</h3>
-                                    <p class="text-gray-600 dark:text-white/60 text-sm font-normal leading-normal">We
-                                        start by deeply understanding your brand, audience, and goals to build a solid
-                                        strategic foundation.</p>
+                                class="about-bento-card relative rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-7 flex flex-col gap-5 overflow-hidden">
+                                <span class="about-step-number">01</span>
+                                <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
+                                    <span class="material-symbols-outlined !text-3xl text-primary">travel_explore</span>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <h3 class="text-gray-900 dark:text-white text-xl font-bold">Discover</h3>
+                                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                                        We start by deeply understanding your brand, audience, and goals to build a
+                                        solid
+                                        strategic foundation.
+                                    </p>
                                 </div>
                             </div>
+                            <!-- Card 2: Design -->
                             <div
-                                class="flex flex-1 gap-4 rounded-xl border border-black/10 dark:border-white/10 bg-white/50 dark:bg-white/5 p-6 flex-col">
-                                <div class="text-primary"><span
-                                        class="material-symbols-outlined !text-4xl">design_services</span></div>
-                                <div class="flex flex-col gap-1">
-                                    <h3 class="text-gray-900 dark:text-white text-lg font-bold">Design</h3>
-                                    <p class="text-gray-600 dark:text-white/60 text-sm font-normal leading-normal">This
-                                        is where creativity flows. I craft visually compelling designs that are both
-                                        innovative and aligned with your strategy.</p>
+                                class="about-bento-card relative rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-7 flex flex-col gap-5 overflow-hidden">
+                                <span class="about-step-number">02</span>
+                                <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
+                                    <span
+                                        class="material-symbols-outlined !text-3xl text-primary">design_services</span>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <h3 class="text-gray-900 dark:text-white text-xl font-bold">Design</h3>
+                                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                                        This is where creativity flows. I craft visually compelling designs that are
+                                        both
+                                        innovative and aligned with your strategy.
+                                    </p>
                                 </div>
                             </div>
+                            <!-- Card 3: Deliver -->
                             <div
-                                class="flex flex-1 gap-4 rounded-xl border border-black/10 dark:border-white/10 bg-white/50 dark:bg-white/5 p-6 flex-col">
-                                <div class="text-primary"><span
-                                        class="material-symbols-outlined !text-4xl">rocket_launch</span></div>
-                                <div class="flex flex-col gap-1">
-                                    <h3 class="text-gray-900 dark:text-white text-lg font-bold">Deliver</h3>
-                                    <p class="text-gray-600 dark:text-white/60 text-sm font-normal leading-normal">I
-                                        deliver high-quality, polished assets and ensure a smooth handover, ready for
-                                        implementation.</p>
+                                class="about-bento-card relative rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-7 flex flex-col gap-5 overflow-hidden">
+                                <span class="about-step-number">03</span>
+                                <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
+                                    <span class="material-symbols-outlined !text-3xl text-primary">rocket_launch</span>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <h3 class="text-gray-900 dark:text-white text-xl font-bold">Deliver</h3>
+                                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                                        I deliver high-quality, polished assets and ensure a smooth handover, ready for
+                                        implementation.
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <!-- Testimonials Section -->
-                    <section class="px-4">
-                        <div class="text-center">
-                                <h2 class="text-gray-900 dark:text-white text-3xl font-bold tracking-tight">What My Clients
-                                Say</h2>
-                            <p class="text-gray-700 dark:text-white/70 mt-2 max-w-2xl mx-auto">I'm proud to have
-                                collaborated with some amazing clients. Here's what they have to say.</p>
+                    <!-- ==================== TESTIMONIALS — MODERN CARDS ==================== -->
+                    <section>
+                        <div class="text-center mb-12">
+                            <div class="flex items-center justify-center gap-3 mb-4">
+                                <div class="w-10 h-1 bg-primary rounded-full"></div>
+                                <span
+                                    class="text-primary text-sm font-semibold tracking-widest uppercase">Testimonials</span>
+                                <div class="w-10 h-1 bg-primary rounded-full"></div>
+                            </div>
+                            <h2 class="text-gray-900 dark:text-white text-3xl sm:text-4xl font-bold tracking-tight">
+                                What My Clients Say
+                            </h2>
+                            <p class="text-gray-500 dark:text-gray-400 mt-3 max-w-2xl mx-auto">
+                                I'm proud to have collaborated with some amazing clients. Here's what they have to say.
+                            </p>
                         </div>
-                        <div class="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-2">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Testimonial 1 -->
                             <div
-                                class="rounded-xl bg-white/50 dark:bg-white/5 p-8 border border-black/10 dark:border-white/10">
-                                <p class="text-gray-800 dark:text-white/90 italic">"Working with Romouths was amazing. In
-                                    just a few hours, I gained basic Photoshop skills through their hands-on learning
-                                    sessions. Romouths is truly a game changer — they not only design for you, but they
-                                    also teach you how to design for yourself.</p>
-                                <p class="text-gray-800 dark:text-white/90 italic mt-3">Whether you want to book a
-                                    hands-on learning session or assign them a design task, Romouths delivers. Companies,
-                                    NGOs, churches, and government institutions — if you have a vision, Romouths will
-                                    bring it to reality. Whatever the task, give it to Romouths."</p>
-                                <div class="mt-4 flex items-center gap-4">
+                                class="testimonial-card-modern rounded-2xl bg-white/60 dark:bg-white/5 p-8 border border-black/5 dark:border-white/10 shadow-sm">
+                                <span class="text-5xl leading-none text-primary/20 font-serif">&ldquo;</span>
+                                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mt-[-0.5rem]">
+                                    Working with Romouths was amazing. In just a few hours, I gained basic Photoshop
+                                    skills through their hands-on learning sessions. Romouths is truly a game changer —
+                                    they not only design for you, but they also teach you how to design for yourself.
+                                </p>
+                                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mt-3">
+                                    Whether you want to book a hands-on learning session or assign them a design task,
+                                    Romouths delivers. Companies, NGOs, churches, and government institutions — if you
+                                    have a vision, Romouths will bring it to reality. Whatever the task, give it to
+                                    Romouths.
+                                </p>
+                                <div
+                                    class="mt-6 flex items-center gap-4 pt-4 border-t border-gray-200/50 dark:border-gray-700/50">
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-green-600 flex items-center justify-center shadow-lg shadow-primary/20">
+                                        <span class="text-white font-bold text-sm">SM</span>
+                                    </div>
                                     <div>
                                         <p class="font-bold text-gray-900 dark:text-white">Sinthani Mollen</p>
-                                        <p class="text-sm text-gray-600 dark:text-white/60">Co-Founder, S&amp;S Investments
-                                        </p>
-                                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">WhatsApp / Call:
-                                            +265 888 17 96 02</p>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">Co-Founder, S&amp;S
+                                            Investments</p>
+                                        <p class="text-xs text-gray-400 dark:text-gray-500 mt-0.5">WhatsApp / Call: +265
+                                            888 17 96 02</p>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Testimonial 2 -->
                             <div
-                                class="rounded-xl bg-white/50 dark:bg-white/5 p-8 border border-black/10 dark:border-white/10">
-                                <p class="text-gray-800 dark:text-white/90 italic">"The process was seamless and
-                                    collaborative. Not only is the final product stunning, but the strategic thinking
-                                    behind it has significantly boosted our engagement."</p>
-                                <div class="mt-4 flex items-center gap-4">
+                                class="testimonial-card-modern rounded-2xl bg-white/60 dark:bg-white/5 p-8 border border-black/5 dark:border-white/10 shadow-sm">
+                                <span class="text-5xl leading-none text-primary/20 font-serif">&ldquo;</span>
+                                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mt-[-0.5rem]">
+                                    The process was seamless and collaborative. Not only is the final product stunning,
+                                    but the strategic thinking behind it has significantly boosted our engagement.
+                                </p>
+                                <div
+                                    class="mt-6 flex items-center gap-4 pt-4 border-t border-gray-200/50 dark:border-gray-700/50">
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
+                                        <span class="text-white font-bold text-sm">IK</span>
+                                    </div>
                                     <div>
                                         <p class="font-bold text-gray-900 dark:text-white">Ishmael Kalonga</p>
-                                        <p class="text-sm text-gray-600 dark:text-white/60">CEO, Shukez Photography</p>
-                                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">WhatsApp / Call:
-                                            +265 995 80 41 66</p>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">CEO, Shukez Photography</p>
+                                        <p class="text-xs text-gray-400 dark:text-gray-500 mt-0.5">WhatsApp / Call: +265
+                                            995 80 41 66</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
+
                 </div>
             </div>
         </section>
