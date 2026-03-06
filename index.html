@@ -972,7 +972,7 @@
                     ? '<p class="text-white/80 text-sm font-medium">' + featCat + '</p>'
                     : '<p class="text-primary text-sm font-medium">' + project.category + '</p>';
 
-                return '<div class="portfolio-card group relative w-full rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2" style="aspect-ratio:' + aspect + ';" onclick="openLightbox(\\'' + encodedImg + '\\')">'
+                return '<div class="portfolio-card group relative w-full rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2" style="aspect-ratio:' + aspect + ';" onclick="openLightbox(\'' + encodedImg + '\')">'
                     + '<img src="' + encodedImg + '" alt="' + project.title + '" class="absolute inset-0 w-full h-full object-cover" loading="lazy">'
                     + overlay
                     + '<div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">'
