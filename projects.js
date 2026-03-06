@@ -100,54 +100,10 @@ const portfolioProjects = [
         featuredCategory: "Graphic Design"
     },
     {
-        title: "Farm Stew Certificate Of Completion",
-        category: "Logo Design & Branding",
-        folder: "branding",
-        image: "works/branding/FARM STEW CERTIFICATE OF COMPLETION.jpg",
-        width: 1920,
-        height: 1357,
-        isRecent: false,
-        isFeatured: false,
-        featuredCategory: "Logo Design & Branding"
-    },
-    {
         title: "Harriet Closet Logo",
         category: "Logo Design & Branding",
         folder: "branding",
         image: "works/branding/Harriet Closet Logo copy.jpg",
-        width: 1920,
-        height: 1920,
-        isRecent: false,
-        isFeatured: false,
-        featuredCategory: "Logo Design & Branding"
-    },
-    {
-        title: "Harriet Closet",
-        category: "Logo Design & Branding",
-        folder: "branding",
-        image: "works/branding/HARRIET CLOSET.jpg",
-        width: 1920,
-        height: 2400,
-        isRecent: false,
-        isFeatured: false,
-        featuredCategory: "Logo Design & Branding"
-    },
-    {
-        title: "Jay Dada Ep",
-        category: "Logo Design & Branding",
-        folder: "branding",
-        image: "works/branding/JAY DADA EP.jpg",
-        width: 1920,
-        height: 1920,
-        isRecent: false,
-        isFeatured: false,
-        featuredCategory: "Logo Design & Branding"
-    },
-    {
-        title: "Kitchen Party Invitation Card",
-        category: "Logo Design & Branding",
-        folder: "branding",
-        image: "works/branding/Kitchen Party Invitation Card.jpg",
         width: 1920,
         height: 1920,
         isRecent: false,
@@ -166,37 +122,26 @@ const portfolioProjects = [
         featuredCategory: "Logo Design & Branding"
     },
     {
-        title: "Queen",
-        category: "Logo Design & Branding",
-        folder: "branding",
-        image: "works/branding/Queen.jpg",
+        title: "Harriet Closet",
+        category: "Marketing Materials",
+        folder: "marketing",
+        image: "works/marketing/HARRIET CLOSET.jpg",
         width: 1920,
         height: 2400,
         isRecent: false,
         isFeatured: false,
-        featuredCategory: "Logo Design & Branding"
+        featuredCategory: "Marketing Materials"
     },
     {
         title: "Romuths Ad",
-        category: "Logo Design & Branding",
-        folder: "branding",
-        image: "works/branding/Romuths Ad.jpg",
+        category: "Marketing Materials",
+        folder: "marketing",
+        image: "works/marketing/Romuths Ad.jpg",
         width: 1920,
         height: 1920,
         isRecent: false,
         isFeatured: false,
-        featuredCategory: "Logo Design & Branding"
-    },
-    {
-        title: "Thandie Wedding Card",
-        category: "Logo Design & Branding",
-        folder: "branding",
-        image: "works/branding/Thandie Wedding Card.jpg",
-        width: 1920,
-        height: 1536,
-        isRecent: false,
-        isFeatured: false,
-        featuredCategory: "Logo Design & Branding"
+        featuredCategory: "Marketing Materials"
     },
     {
         title: "Andrina Elegant Nails",
@@ -263,6 +208,61 @@ const portfolioProjects = [
         isRecent: true,
         isFeatured: false,
         featuredCategory: "Graphic Design"
+    },
+    {
+        title: "Farm Stew Certificate Of Completion",
+        category: "Print Design",
+        folder: "print",
+        image: "works/print/FARM STEW CERTIFICATE OF COMPLETION.jpg",
+        width: 1920,
+        height: 1357,
+        isRecent: false,
+        isFeatured: false,
+        featuredCategory: "Print Design"
+    },
+    {
+        title: "Jay Dada Ep",
+        category: "Illustration",
+        folder: "illustration",
+        image: "works/illustration/JAY DADA EP.jpg",
+        width: 1920,
+        height: 1920,
+        isRecent: false,
+        isFeatured: false,
+        featuredCategory: "Illustration"
+    },
+    {
+        title: "Kitchen Party Invitation Card",
+        category: "Illustration",
+        folder: "illustration",
+        image: "works/illustration/Kitchen Party Invitation Card.jpg",
+        width: 1920,
+        height: 1920,
+        isRecent: false,
+        isFeatured: false,
+        featuredCategory: "Illustration"
+    },
+    {
+        title: "Queen",
+        category: "Illustration",
+        folder: "illustration",
+        image: "works/illustration/Queen.jpg",
+        width: 1920,
+        height: 2400,
+        isRecent: false,
+        isFeatured: false,
+        featuredCategory: "Illustration"
+    },
+    {
+        title: "Thandie Wedding Card",
+        category: "Illustration",
+        folder: "illustration",
+        image: "works/illustration/Thandie Wedding Card.jpg",
+        width: 1920,
+        height: 1536,
+        isRecent: false,
+        isFeatured: false,
+        featuredCategory: "Illustration"
     }
 ];
 
