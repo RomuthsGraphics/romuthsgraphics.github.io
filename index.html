@@ -589,76 +589,116 @@
 
                 <!-- TextGrid / Service Card Grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-                    <div
-                        class="flex flex-1 gap-4 rounded-xl border border-black/10 dark:border-white/10 bg-white dark:bg-black/20 p-6 flex-col hover:shadow-lg transition-shadow">
-                        <div class="text-primary">
-                            <span class="material-symbols-outlined !text-3xl">palette</span>
+                    <div class="service-carousel-card flex flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-black flex-col hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden min-h-[300px] group cursor-pointer"
+                        data-folder="branding">
+                        <div
+                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-40 group-hover:opacity-60 z-0">
                         </div>
-                        <div class="flex flex-col gap-1">
-                            <h2 class="text-gray-900 dark:text-white text-base font-bold leading-tight">Logo Design &
-                                Branding</h2>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm font-normal leading-normal">Creating
-                                memorable and impactful brand identities that tell your story.</p>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0">
                         </div>
-                    </div>
-                    <div
-                        class="flex flex-1 gap-4 rounded-xl border border-black/10 dark:border-white/10 bg-white dark:bg-black/20 p-6 flex-col hover:shadow-lg transition-shadow">
-                        <div class="text-primary">
-                            <span class="material-symbols-outlined !text-3xl">monitor</span>
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <h2 class="text-gray-900 dark:text-white text-base font-bold leading-tight">Web & UI/UX
-                                Design</h2>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm font-normal leading-normal">Designing
-                                user-friendly and visually stunning digital experiences for web and mobile.</p>
+                        <div class="relative z-10 p-6 flex flex-col h-full">
+                            <div class="text-primary mb-auto">
+                                <span class="material-symbols-outlined !text-4xl drop-shadow-md">palette</span>
+                            </div>
+                            <div class="flex flex-col gap-2 mt-auto">
+                                <h2 class="text-white text-xl font-bold leading-tight drop-shadow-md">Logo Design &
+                                    Branding</h2>
+                                <p class="text-white/80 text-sm font-medium leading-relaxed">Creating memorable and
+                                    impactful brand identities that tell your story.</p>
+                            </div>
                         </div>
                     </div>
-                    <div
-                        class="flex flex-1 gap-4 rounded-xl border border-black/10 dark:border-white/10 bg-white dark:bg-black/20 p-6 flex-col hover:shadow-lg transition-shadow">
-                        <div class="text-primary">
-                            <span class="material-symbols-outlined !text-3xl">book</span>
+                    <div class="service-carousel-card flex flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-black flex-col hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden min-h-[300px] group cursor-pointer"
+                        data-folder="ui-ux">
+                        <div
+                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-40 group-hover:opacity-60 z-0">
                         </div>
-                        <div class="flex flex-col gap-1">
-                            <h2 class="text-gray-900 dark:text-white text-base font-bold leading-tight">Print Design
-                            </h2>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm font-normal leading-normal">Crafting
-                                beautiful brochures, business cards, and posters that leave a lasting impression.</p>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0">
                         </div>
-                    </div>
-                    <div
-                        class="flex flex-1 gap-4 rounded-xl border border-black/10 dark:border-white/10 bg-white dark:bg-black/20 p-6 flex-col hover:shadow-lg transition-shadow">
-                        <div class="text-primary">
-                            <span class="material-symbols-outlined !text-3xl">draw</span>
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <h2 class="text-gray-900 dark:text-white text-base font-bold leading-tight">Illustration
-                            </h2>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm font-normal leading-normal">Producing
-                                unique custom digital illustrations for websites, marketing, and more.</p>
+                        <div class="relative z-10 p-6 flex flex-col h-full">
+                            <div class="text-primary mb-auto">
+                                <span class="material-symbols-outlined !text-4xl drop-shadow-md">monitor</span>
+                            </div>
+                            <div class="flex flex-col gap-2 mt-auto">
+                                <h2 class="text-white text-xl font-bold leading-tight drop-shadow-md">Web & UI/UX Design
+                                </h2>
+                                <p class="text-white/80 text-sm font-medium leading-relaxed">Designing user-friendly and
+                                    visually stunning digital experiences for web and mobile.</p>
+                            </div>
                         </div>
                     </div>
-                    <div
-                        class="flex flex-1 gap-4 rounded-xl border border-black/10 dark:border-white/10 bg-white dark:bg-black/20 p-6 flex-col hover:shadow-lg transition-shadow">
-                        <div class="text-primary">
-                            <span class="material-symbols-outlined !text-3xl">inventory_2</span>
+                    <div class="service-carousel-card flex flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-black flex-col hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden min-h-[300px] group cursor-pointer"
+                        data-folder="print">
+                        <div
+                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-40 group-hover:opacity-60 z-0">
                         </div>
-                        <div class="flex flex-col gap-1">
-                            <h2 class="text-gray-900 dark:text-white text-base font-bold leading-tight">Packaging Design
-                            </h2>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm font-normal leading-normal">Developing
-                                eye-catching and effective packaging that stands out on the shelf.</p>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0">
+                        </div>
+                        <div class="relative z-10 p-6 flex flex-col h-full">
+                            <div class="text-primary mb-auto">
+                                <span class="material-symbols-outlined !text-4xl drop-shadow-md">book</span>
+                            </div>
+                            <div class="flex flex-col gap-2 mt-auto">
+                                <h2 class="text-white text-xl font-bold leading-tight drop-shadow-md">Print Design</h2>
+                                <p class="text-white/80 text-sm font-medium leading-relaxed">Crafting beautiful
+                                    brochures, business cards, and posters that leave a lasting impression.</p>
+                            </div>
                         </div>
                     </div>
-                    <div
-                        class="flex flex-1 gap-4 rounded-xl border border-black/10 dark:border-white/10 bg-white dark:bg-black/20 p-6 flex-col hover:shadow-lg transition-shadow">
-                        <div class="text-primary">
-                            <span class="material-symbols-outlined !text-3xl">campaign</span>
+                    <div class="service-carousel-card flex flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-black flex-col hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden min-h-[300px] group cursor-pointer"
+                        data-folder="illustration">
+                        <div
+                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-40 group-hover:opacity-60 z-0">
                         </div>
-                        <div class="flex flex-col gap-1">
-                            <h2 class="text-gray-900 dark:text-white text-base font-bold leading-tight">Marketing
-                                Materials</h2>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm font-normal leading-normal">Creating
-                                cohesive and compelling materials for your marketing campaigns.</p>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0">
+                        </div>
+                        <div class="relative z-10 p-6 flex flex-col h-full">
+                            <div class="text-primary mb-auto">
+                                <span class="material-symbols-outlined !text-4xl drop-shadow-md">draw</span>
+                            </div>
+                            <div class="flex flex-col gap-2 mt-auto">
+                                <h2 class="text-white text-xl font-bold leading-tight drop-shadow-md">Illustration</h2>
+                                <p class="text-white/80 text-sm font-medium leading-relaxed">Producing unique custom
+                                    digital illustrations for websites, marketing, and more.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-carousel-card flex flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-black flex-col hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden min-h-[300px] group cursor-pointer"
+                        data-folder="packaging">
+                        <div
+                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-40 group-hover:opacity-60 z-0">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0">
+                        </div>
+                        <div class="relative z-10 p-6 flex flex-col h-full">
+                            <div class="text-primary mb-auto">
+                                <span class="material-symbols-outlined !text-4xl drop-shadow-md">inventory_2</span>
+                            </div>
+                            <div class="flex flex-col gap-2 mt-auto">
+                                <h2 class="text-white text-xl font-bold leading-tight drop-shadow-md">Packaging Design
+                                </h2>
+                                <p class="text-white/80 text-sm font-medium leading-relaxed">Developing eye-catching and
+                                    effective packaging that stands out on the shelf.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-carousel-card flex flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-black flex-col hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden min-h-[300px] group cursor-pointer"
+                        data-folder="marketing">
+                        <div
+                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-40 group-hover:opacity-60 z-0">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0">
+                        </div>
+                        <div class="relative z-10 p-6 flex flex-col h-full">
+                            <div class="text-primary mb-auto">
+                                <span class="material-symbols-outlined !text-4xl drop-shadow-md">campaign</span>
+                            </div>
+                            <div class="flex flex-col gap-2 mt-auto">
+                                <h2 class="text-white text-xl font-bold leading-tight drop-shadow-md">Marketing
+                                    Materials</h2>
+                                <p class="text-white/80 text-sm font-medium leading-relaxed">Creating cohesive and
+                                    compelling materials for your marketing campaigns.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -892,31 +932,50 @@
             var recentGrid = document.getElementById('recentWorksGrid');
             var showcaseGrid = document.getElementById('showcaseGrid');
             if (!recentGrid && !showcaseGrid) return;
+
+            // Remove masonry columns and apply flexbox row layout
+            if (recentGrid) { recentGrid.className = 'flex flex-wrap gap-4 p-4 justify-center'; }
+            if (showcaseGrid) { showcaseGrid.className = 'flex flex-wrap gap-4 p-4 justify-center'; }
+
             if (typeof portfolioProjects === 'undefined') return;
             var recentHtml = '';
             var showcaseHtml = '';
+
             for (var i = 0; i < portfolioProjects.length; i++) {
                 var project = portfolioProjects[i];
                 var encodedImg = project.image.replace(/ /g, '%20');
-                var cardHtml = '<div class="portfolio-card break-inside-avoid mb-4 group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2" onclick="openLightbox(\'' + encodedImg + '\')">'
-                    + '<img src="' + encodedImg + '" alt="' + project.title + '" class="w-full h-auto object-cover" loading="lazy">'
-                    + '<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>'
+
+                // Calculate flexbox sizes based on dimensions array
+                var width = project.width || 800;
+                var height = project.height || 600;
+                var aspectRatio = width / height;
+                var baseHeight = 280; // Default row height
+                var flexBasis = Math.round(aspectRatio * baseHeight);
+
+                // Flex sizing: grow based on aspect ratio to perfectly align in rows
+                var inlineStyle = `flex: ${aspectRatio} 1 ${flexBasis}px; min-height: 220px; max-height: 400px;`;
+
+                var cardHtml = '<div class="portfolio-card group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2" style="' + inlineStyle + '" onclick="openLightbox(\'' + encodedImg + '\')">'
+                    + '<img src="' + encodedImg + '" alt="' + project.title + '" class="absolute inset-0 w-full h-full object-cover" loading="lazy">'
+                    + '<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>'
                     + '<div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">'
-                    + '<h3 class="text-white text-lg font-bold">' + project.title + '</h3>'
-                    + '<p class="text-white/70 text-sm">' + project.category + '</p>'
+                    + '<h3 class="text-white text-lg font-bold truncate">' + project.title + '</h3>'
+                    + '<p class="text-primary text-sm font-medium">' + project.category + '</p>'
                     + '</div>'
                     + '<div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"><span class="material-symbols-outlined text-white bg-primary/80 p-2 rounded-full text-sm">zoom_in</span></div>'
                     + '</div>';
+
                 var featCat = project.featuredCategory || project.category;
-                var showcaseCardHtml = '<div class="portfolio-card break-inside-avoid mb-4 group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2" onclick="openLightbox(\'' + encodedImg + '\')">'
-                    + '<img src="' + encodedImg + '" alt="' + project.title + '" class="w-full h-auto object-cover" loading="lazy">'
-                    + '<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>'
+                var showcaseCardHtml = '<div class="portfolio-card group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2" style="' + inlineStyle + '" onclick="openLightbox(\'' + encodedImg + '\')">'
+                    + '<img src="' + encodedImg + '" alt="' + project.title + '" class="absolute inset-0 w-full h-full object-cover" loading="lazy">'
+                    + '<div class="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>'
                     + '<div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">'
-                    + '<span class="inline-block bg-white/20 backdrop-blur-sm px-2 py-1 rounded text-xs text-white mb-2">Featured</span>'
-                    + '<h3 class="text-white text-lg font-bold">' + project.title + '</h3>'
-                    + '<p class="text-white/70 text-sm">' + featCat + '</p>'
+                    + '<span class="inline-block bg-white/20 backdrop-blur-sm px-2 py-1 rounded text-xs text-white mb-2 font-bold tracking-wide">FEATURED</span>'
+                    + '<h3 class="text-white text-lg font-bold truncate">' + project.title + '</h3>'
+                    + '<p class="text-white/80 text-sm font-medium">' + featCat + '</p>'
                     + '</div>'
                     + '</div>';
+
                 if (project.isFeatured && showcaseGrid) { showcaseHtml += showcaseCardHtml; }
                 if (project.isRecent && recentGrid) { recentHtml += cardHtml; }
             }
@@ -968,6 +1027,7 @@
         // DOMContentLoaded
         document.addEventListener('DOMContentLoaded', function () {
             renderProjects();
+            initServiceCarousels();
             // Theme toggle
             var themeToggle = document.getElementById('themeToggle');
             var themeIcon = themeToggle ? themeToggle.querySelector('.material-symbols-outlined') : null;
