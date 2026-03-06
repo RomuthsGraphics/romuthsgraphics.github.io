@@ -592,9 +592,9 @@
                     <div class="service-carousel-card flex flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-black flex-col hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden min-h-[300px] group cursor-pointer"
                         data-folder="branding">
                         <div
-                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-40 group-hover:opacity-60 z-0">
+                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-70 group-hover:opacity-90 z-0">
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-0">
                         </div>
                         <div class="relative z-10 p-6 flex flex-col h-full">
                             <div class="text-primary mb-auto">
@@ -611,9 +611,9 @@
                     <div class="service-carousel-card flex flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-black flex-col hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden min-h-[300px] group cursor-pointer"
                         data-folder="ui-ux">
                         <div
-                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-40 group-hover:opacity-60 z-0">
+                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-70 group-hover:opacity-90 z-0">
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-0">
                         </div>
                         <div class="relative z-10 p-6 flex flex-col h-full">
                             <div class="text-primary mb-auto">
@@ -630,9 +630,9 @@
                     <div class="service-carousel-card flex flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-black flex-col hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden min-h-[300px] group cursor-pointer"
                         data-folder="print">
                         <div
-                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-40 group-hover:opacity-60 z-0">
+                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-70 group-hover:opacity-90 z-0">
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-0">
                         </div>
                         <div class="relative z-10 p-6 flex flex-col h-full">
                             <div class="text-primary mb-auto">
@@ -648,9 +648,9 @@
                     <div class="service-carousel-card flex flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-black flex-col hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden min-h-[300px] group cursor-pointer"
                         data-folder="illustration">
                         <div
-                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-40 group-hover:opacity-60 z-0">
+                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-70 group-hover:opacity-90 z-0">
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-0">
                         </div>
                         <div class="relative z-10 p-6 flex flex-col h-full">
                             <div class="text-primary mb-auto">
@@ -666,9 +666,9 @@
                     <div class="service-carousel-card flex flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-black flex-col hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden min-h-[300px] group cursor-pointer"
                         data-folder="packaging">
                         <div
-                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-40 group-hover:opacity-60 z-0">
+                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-70 group-hover:opacity-90 z-0">
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-0">
                         </div>
                         <div class="relative z-10 p-6 flex flex-col h-full">
                             <div class="text-primary mb-auto">
@@ -685,9 +685,9 @@
                     <div class="service-carousel-card flex flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-black flex-col hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden min-h-[300px] group cursor-pointer"
                         data-folder="marketing">
                         <div
-                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-40 group-hover:opacity-60 z-0">
+                            class="carousel-bg absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-70 group-hover:opacity-90 z-0">
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-0">
                         </div>
                         <div class="relative z-10 p-6 flex flex-col h-full">
                             <div class="text-primary mb-auto">
@@ -933,56 +933,83 @@
             var showcaseGrid = document.getElementById('showcaseGrid');
             if (!recentGrid && !showcaseGrid) return;
 
-            // Horizontal row layout sized by image dimensions
-            if (recentGrid) { recentGrid.className = 'flex gap-4 p-4 overflow-x-auto overscroll-x-contain snap-x snap-mandatory'; }
-            if (showcaseGrid) { showcaseGrid.className = 'flex gap-4 p-4 overflow-x-auto overscroll-x-contain snap-x snap-mandatory'; }
+            // Non-scrolling layout: groups of same dimensions in their own rows
+            if (recentGrid) { recentGrid.className = 'flex flex-col gap-6 p-4'; }
+            if (showcaseGrid) { showcaseGrid.className = 'flex flex-col gap-6 p-4'; }
 
             if (typeof portfolioProjects === 'undefined') return;
-            var recentHtml = '';
-            var showcaseHtml = '';
 
-            for (var i = 0; i < portfolioProjects.length; i++) {
-                var project = portfolioProjects[i];
+            function groupByDimensions(projects) {
+                var order = [];
+                var groups = {};
+                for (var i = 0; i < projects.length; i++) {
+                    var p = projects[i];
+                    var w = p.width || 0;
+                    var h = p.height || 0;
+                    var key = w + 'x' + h;
+                    if (!groups[key]) { groups[key] = []; order.push(key); }
+                    groups[key].push(p);
+                }
+                return { order: order, groups: groups };
+            }
+
+            function buildCardHtml(project, variant) {
                 var encodedImg = project.image.replace(/ /g, '%20');
+                var w = project.width || 800;
+                var h = project.height || 600;
+                var aspect = (w && h) ? (w + ' / ' + h) : '4 / 3';
+                var featCat = project.featuredCategory || project.category;
 
-                // Calculate flexbox sizes based on dimensions array
-                var width = project.width || 800;
-                var height = project.height || 600;
-                var aspectRatio = width / height;
-                var baseHeight = (window.innerWidth && window.innerWidth < 640) ? 220 : 280; // row height
-                var flexBasis = Math.max(220, Math.round(aspectRatio * baseHeight));
+                var overlay = variant === 'showcase'
+                    ? '<div class="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>'
+                    : '<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>';
 
-                // Fixed-height cards, width based on aspect ratio (horizontal scroll row)
-                var inlineStyle = `flex: 0 0 ${flexBasis}px; height: ${baseHeight}px;`;
+                var badge = variant === 'showcase'
+                    ? '<span class="inline-block bg-white/20 backdrop-blur-sm px-2 py-1 rounded text-xs text-white mb-2 font-bold tracking-wide">FEATURED</span>'
+                    : '';
 
-                var cardHtml = '<div class="portfolio-card group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2 snap-start" style="' + inlineStyle + '" onclick="openLightbox(\'' + encodedImg + '\')">'
+                var meta = variant === 'showcase'
+                    ? '<p class="text-white/80 text-sm font-medium">' + featCat + '</p>'
+                    : '<p class="text-primary text-sm font-medium">' + project.category + '</p>';
+
+                return '<div class="portfolio-card group relative w-full rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2" style="aspect-ratio:' + aspect + ';" onclick="openLightbox(\\'' + encodedImg + '\\')">'
                     + '<img src="' + encodedImg + '" alt="' + project.title + '" class="absolute inset-0 w-full h-full object-cover" loading="lazy">'
-                    + '<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>'
+                    + overlay
                     + '<div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">'
+                    + badge
                     + '<h3 class="text-white text-lg font-bold truncate">' + project.title + '</h3>'
-                    + '<p class="text-primary text-sm font-medium">' + project.category + '</p>'
+                    + meta
                     + '</div>'
                     + '<div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"><span class="material-symbols-outlined text-white bg-primary/80 p-2 rounded-full text-sm">zoom_in</span></div>'
                     + '</div>';
-
-                var featCat = project.featuredCategory || project.category;
-                var showcaseCardHtml = '<div class="portfolio-card group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2 snap-start" style="' + inlineStyle + '" onclick="openLightbox(\'' + encodedImg + '\')">'
-                    + '<img src="' + encodedImg + '" alt="' + project.title + '" class="absolute inset-0 w-full h-full object-cover" loading="lazy">'
-                    + '<div class="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>'
-                    + '<div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">'
-                    + '<span class="inline-block bg-white/20 backdrop-blur-sm px-2 py-1 rounded text-xs text-white mb-2 font-bold tracking-wide">FEATURED</span>'
-                    + '<h3 class="text-white text-lg font-bold truncate">' + project.title + '</h3>'
-                    + '<p class="text-white/80 text-sm font-medium">' + featCat + '</p>'
-                    + '</div>'
-                    + '</div>';
-
-                // Recent Works = everything in works/recent/
-                if (project.folder === 'recent' && recentGrid) { recentHtml += cardHtml; }
-                // Featured Showcase = everything in works/showcase/
-                if (project.folder === 'showcase' && showcaseGrid) { showcaseHtml += showcaseCardHtml; }
             }
-            if (recentGrid) recentGrid.innerHTML = recentHtml;
-            if (showcaseGrid) showcaseGrid.innerHTML = showcaseHtml;
+
+            function renderGroupedInto(container, projects, variant) {
+                if (!container) return;
+                var grouped = groupByDimensions(projects);
+                var html = '';
+                for (var i = 0; i < grouped.order.length; i++) {
+                    var key = grouped.order[i];
+                    var items = grouped.groups[key];
+                    var row = '<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">';
+                    for (var j = 0; j < items.length; j++) {
+                        row += buildCardHtml(items[j], variant);
+                    }
+                    row += '</div>';
+                    html += row;
+                }
+                container.innerHTML = html;
+            }
+
+            var recentProjects = [];
+            var showcaseProjects = [];
+            for (var i = 0; i < portfolioProjects.length; i++) {
+                if (portfolioProjects[i].folder === 'recent') recentProjects.push(portfolioProjects[i]);
+                if (portfolioProjects[i].folder === 'showcase') showcaseProjects.push(portfolioProjects[i]);
+            }
+
+            renderGroupedInto(recentGrid, recentProjects, 'recent');
+            renderGroupedInto(showcaseGrid, showcaseProjects, 'showcase');
         }
 
         // Services background rotation (every 2 seconds)
