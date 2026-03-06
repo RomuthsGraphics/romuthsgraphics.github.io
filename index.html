@@ -946,7 +946,10 @@
                     var p = projects[i];
                     var w = p.width || 0;
                     var h = p.height || 0;
-                    var key = w + 'x' + h;
+                    // Group by similar aspect ratios instead of exact pixels
+                    var ratio = (w && h) ? (w / h) : 1;
+                    // Round to 2 decimal places so "close" sizes fall into same bucket
+                    var key = (Math.round(ratio * 100) / 100).toFixed(2);
                     if (!groups[key]) { groups[key] = []; order.push(key); }
                     groups[key].push(p);
                 }
