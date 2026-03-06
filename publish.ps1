@@ -3,18 +3,22 @@ Add-Type -AssemblyName System.Drawing
 $ProjectRoot = "E:\WEB AND APP DEVELOPMENT\WebSites\Romuths Graphic Designing"
 $ProjectsFile = Join-Path $ProjectRoot "projects.js"
 
-# ============================================================
-# STEP 1: Find new images not yet in projects.js
-# ============================================================
+Set-Location $ProjectRoot
+
+# Fix git safe directory (prevents ownership errors)
+git config --global --add safe.directory 'E:/WEB AND APP DEVELOPMENT/WebSites/Romuths Graphic Designing' 2>$null
+
 Write-Host ""
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "  Romuths Graphics - Publish New Works  " -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
+# ============================================================
+# STEP 1: Find new images not yet in projects.js
+# ============================================================
 $projectsContent = Get-Content $ProjectsFile -Raw
 
-# Scan both folders for image files
 $recentImages = Get-ChildItem "$ProjectRoot\works\recent" -File | Where-Object { $_.Extension -match '\.(jpg|jpeg|png|webp)$' }
 $showcaseImages = Get-ChildItem "$ProjectRoot\works\showcase" -File | Where-Object { $_.Extension -match '\.(jpg|jpeg|png|webp)$' }
 
@@ -22,12 +26,10 @@ $newRecent = @()
 $newShowcase = @()
 
 foreach ($img in $recentImages) {
-    $searchPath = "works/recent/$($img.Name)"
     if ($projectsContent -notmatch [regex]::Escape($img.Name)) {
         $newRecent += $img
     }
 }
-
 foreach ($img in $showcaseImages) {
     if ($projectsContent -notmatch [regex]::Escape($img.Name)) {
         $newShowcase += $img
@@ -37,7 +39,20 @@ foreach ($img in $showcaseImages) {
 $totalNew = $newRecent.Count + $newShowcase.Count
 
 if ($totalNew -eq 0) {
-    Write-Host "No new images found. Everything is already in projects.js!" -ForegroundColor Yellow
+    Write-Host "No new images found. Checking if there are unpushed changes..." -ForegroundColor Yellow
+
+    $unpushed = git status --short
+    if ($unpushed) {
+        Write-Host "Found unpushed changes. Pushing to GitHub..." -ForegroundColor Cyan
+        git add .
+        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        git commit -m "Sync update - $timestamp"
+        git push origin main
+        Write-Host ""
+        Write-Host "Pushed successfully!" -ForegroundColor Green
+    } else {
+        Write-Host "Everything is up to date!" -ForegroundColor Green
+    }
     Write-Host ""
     Read-Host "Press Enter to exit"
     exit
@@ -51,18 +66,17 @@ Write-Host ""
 # ============================================================
 # STEP 2: Compress new images
 # ============================================================
-Write-Host "--- Compressing new images ---" -ForegroundColor Cyan
+Write-Host "--- Step 1/3: Compressing images ---" -ForegroundColor Cyan
 
 function Compress-Image {
     param([string]$InputPath, [int]$MaxWidth = 1920, [int]$Quality = 65)
     try {
-        $img = [System.Drawing.Image]::FromFile($InputPath)
         $originalSize = (Get-Item $InputPath).Length
         if ($originalSize -lt 500KB) {
-            $img.Dispose()
             Write-Host "  SKIP (already small): $(Split-Path $InputPath -Leaf)" -ForegroundColor DarkGray
             return
         }
+        $img = [System.Drawing.Image]::FromFile($InputPath)
         $ratio = if ($img.Width -gt $MaxWidth) { $MaxWidth / $img.Width } else { 1.0 }
         $newW = [int]($img.Width * $ratio)
         $newH = [int]($img.Height * $ratio)
@@ -102,25 +116,23 @@ foreach ($img in $newShowcase) { Compress-Image -InputPath $img.FullName }
 # STEP 3: Add new entries to projects.js
 # ============================================================
 Write-Host ""
-Write-Host "--- Adding to projects.js ---" -ForegroundColor Cyan
+Write-Host "--- Step 2/3: Adding to projects.js ---" -ForegroundColor Cyan
 
 function Get-TitleFromFilename {
     param([string]$Filename)
     $name = [System.IO.Path]::GetFileNameWithoutExtension($Filename)
-    # Clean up common patterns
     $name = $name -replace '_', ' '
     $name = $name -replace ' copy$', ''
     $name = $name -replace ' \(\d+\)$', ''
-    # Title case
     $words = $name -split ' '
     $titled = ($words | ForEach-Object {
-        if ($_.Length -gt 0) {
-            $_.Substring(0,1).ToUpper() + $_.Substring(1).ToLower()
-        }
+        if ($_.Length -gt 0) { $_.Substring(0,1).ToUpper() + $_.Substring(1).ToLower() }
     }) -join ' '
     return $titled
 }
 
+# Re-read the file in case it changed
+$projectsContent = Get-Content $ProjectsFile -Raw
 $newEntries = @()
 
 foreach ($img in $newRecent) {
@@ -138,7 +150,6 @@ foreach ($img in $newShowcase) {
 }
 
 if ($newEntries.Count -gt 0) {
-    # Insert new entries before the closing ];
     $joined = ($newEntries -join ",`n") + ","
     $projectsContent = $projectsContent -replace '\];(\s*)$', "$joined`n];`$1"
     Set-Content -Path $ProjectsFile -Value $projectsContent -NoNewline
@@ -147,20 +158,28 @@ if ($newEntries.Count -gt 0) {
 }
 
 # ============================================================
-# STEP 4: Push to GitHub
+# STEP 4: Push everything to GitHub
 # ============================================================
 Write-Host ""
-Write-Host "--- Pushing to GitHub ---" -ForegroundColor Cyan
+Write-Host "--- Step 3/3: Pushing to GitHub ---" -ForegroundColor Cyan
 
-Set-Location $ProjectRoot
 git add .
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 git commit -m "Added $totalNew new project(s) - $timestamp"
 git push origin main
 
-Write-Host ""
-Write-Host "========================================" -ForegroundColor Green
-Write-Host "  Done! $totalNew new work(s) published! " -ForegroundColor Green
-Write-Host "========================================" -ForegroundColor Green
+if ($LASTEXITCODE -eq 0) {
+    Write-Host ""
+    Write-Host "========================================" -ForegroundColor Green
+    Write-Host "  SUCCESS! $totalNew new work(s) published!" -ForegroundColor Green
+    Write-Host "  Live at: https://romuthsgraphics.github.io/" -ForegroundColor Green
+    Write-Host "  (Wait 1-2 minutes for GitHub to update)" -ForegroundColor Yellow
+    Write-Host "========================================" -ForegroundColor Green
+} else {
+    Write-Host ""
+    Write-Host "  Push failed! Check your internet connection." -ForegroundColor Red
+    Write-Host "  You can try again by double-clicking Publish.bat" -ForegroundColor Yellow
+}
+
 Write-Host ""
 Read-Host "Press Enter to exit"
