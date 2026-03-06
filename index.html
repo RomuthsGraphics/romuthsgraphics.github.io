@@ -933,9 +933,9 @@
             var showcaseGrid = document.getElementById('showcaseGrid');
             if (!recentGrid && !showcaseGrid) return;
 
-            // Remove masonry columns and apply flexbox row layout
-            if (recentGrid) { recentGrid.className = 'flex flex-wrap gap-4 p-4 justify-center'; }
-            if (showcaseGrid) { showcaseGrid.className = 'flex flex-wrap gap-4 p-4 justify-center'; }
+            // Horizontal row layout sized by image dimensions
+            if (recentGrid) { recentGrid.className = 'flex gap-4 p-4 overflow-x-auto overscroll-x-contain snap-x snap-mandatory'; }
+            if (showcaseGrid) { showcaseGrid.className = 'flex gap-4 p-4 overflow-x-auto overscroll-x-contain snap-x snap-mandatory'; }
 
             if (typeof portfolioProjects === 'undefined') return;
             var recentHtml = '';
@@ -949,13 +949,13 @@
                 var width = project.width || 800;
                 var height = project.height || 600;
                 var aspectRatio = width / height;
-                var baseHeight = 280; // Default row height
-                var flexBasis = Math.round(aspectRatio * baseHeight);
+                var baseHeight = (window.innerWidth && window.innerWidth < 640) ? 220 : 280; // row height
+                var flexBasis = Math.max(220, Math.round(aspectRatio * baseHeight));
 
-                // Flex sizing: grow based on aspect ratio to perfectly align in rows
-                var inlineStyle = `flex: ${aspectRatio} 1 ${flexBasis}px; min-height: 220px; max-height: 400px;`;
+                // Fixed-height cards, width based on aspect ratio (horizontal scroll row)
+                var inlineStyle = `flex: 0 0 ${flexBasis}px; height: ${baseHeight}px;`;
 
-                var cardHtml = '<div class="portfolio-card group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2" style="' + inlineStyle + '" onclick="openLightbox(\'' + encodedImg + '\')">'
+                var cardHtml = '<div class="portfolio-card group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2 snap-start" style="' + inlineStyle + '" onclick="openLightbox(\'' + encodedImg + '\')">'
                     + '<img src="' + encodedImg + '" alt="' + project.title + '" class="absolute inset-0 w-full h-full object-cover" loading="lazy">'
                     + '<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>'
                     + '<div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">'
@@ -966,7 +966,7 @@
                     + '</div>';
 
                 var featCat = project.featuredCategory || project.category;
-                var showcaseCardHtml = '<div class="portfolio-card group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2" style="' + inlineStyle + '" onclick="openLightbox(\'' + encodedImg + '\')">'
+                var showcaseCardHtml = '<div class="portfolio-card group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2 snap-start" style="' + inlineStyle + '" onclick="openLightbox(\'' + encodedImg + '\')">'
                     + '<img src="' + encodedImg + '" alt="' + project.title + '" class="absolute inset-0 w-full h-full object-cover" loading="lazy">'
                     + '<div class="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>'
                     + '<div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">'
@@ -976,11 +976,89 @@
                     + '</div>'
                     + '</div>';
 
-                if (project.isFeatured && showcaseGrid) { showcaseHtml += showcaseCardHtml; }
-                if (project.isRecent && recentGrid) { recentHtml += cardHtml; }
+                // Recent Works = everything in works/recent/
+                if (project.folder === 'recent' && recentGrid) { recentHtml += cardHtml; }
+                // Featured Showcase = everything in works/showcase/
+                if (project.folder === 'showcase' && showcaseGrid) { showcaseHtml += showcaseCardHtml; }
             }
             if (recentGrid) recentGrid.innerHTML = recentHtml;
             if (showcaseGrid) showcaseGrid.innerHTML = showcaseHtml;
+        }
+
+        // Services background rotation (every 2 seconds)
+        function initServiceCarousels() {
+            if (typeof portfolioProjects === 'undefined') return;
+            var cards = document.querySelectorAll('.service-carousel-card');
+            if (!cards || !cards.length) return;
+
+            function encodeForCssUrl(path) {
+                // Preserve slashes; encode spaces and other URL-unsafe chars
+                return encodeURI(path).replace(/'/g, '%27');
+            }
+
+            for (var i = 0; i < cards.length; i++) {
+                (function () {
+                    var card = cards[i];
+                    var folder = card.getAttribute('data-folder');
+                    if (!folder) return;
+
+                    var images = [];
+                    for (var j = 0; j < portfolioProjects.length; j++) {
+                        if (portfolioProjects[j].folder === folder && portfolioProjects[j].image) {
+                            images.push(portfolioProjects[j].image);
+                        }
+                    }
+                    if (images.length === 0) return;
+
+                    var bgA = card.querySelector('.carousel-bg');
+                    if (!bgA) return;
+
+                    // Ensure we have a second layer for crossfading
+                    var bgB = card.querySelector('.carousel-bg[data-layer="b"]');
+                    if (!bgB) {
+                        bgB = document.createElement('div');
+                        bgB.className = bgA.className;
+                        bgB.setAttribute('data-layer', 'b');
+                        // Put it after bgA so it sits above when visible
+                        bgA.insertAdjacentElement('afterend', bgB);
+                    }
+
+                    var idx = 0;
+                    var showingA = true;
+
+                    // Initial images
+                    bgA.style.backgroundImage = "url('" + encodeForCssUrl(images[0]) + "')";
+                    if (images.length > 1) {
+                        bgB.style.backgroundImage = "url('" + encodeForCssUrl(images[1]) + "')";
+                    }
+                    // Keep one layer fully hidden even on hover (inline style beats group-hover)
+                    bgA.style.opacity = '';
+                    bgB.style.opacity = '0';
+
+                    // Avoid double intervals
+                    if (card.dataset && card.dataset.carouselIntervalId) {
+                        clearInterval(parseInt(card.dataset.carouselIntervalId, 10));
+                    }
+
+                    if (images.length < 2) return;
+
+                    var intervalId = setInterval(function () {
+                        idx = (idx + 1) % images.length;
+                        var incoming = showingA ? bgB : bgA;
+                        var outgoing = showingA ? bgA : bgB;
+
+                        incoming.style.backgroundImage = "url('" + encodeForCssUrl(images[idx]) + "')";
+
+                        // Crossfade: hide outgoing via inline opacity, show incoming by clearing it
+                        outgoing.style.opacity = '0';
+                        incoming.style.opacity = '';
+
+                        showingA = !showingA;
+                    }, 2000);
+
+                    if (card.dataset) card.dataset.carouselIntervalId = String(intervalId);
+                })();
+            }
         }
 
         // Lightbox
