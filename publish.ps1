@@ -5,7 +5,7 @@ $ProjectsFile = Join-Path $ProjectRoot "projects.js"
 
 Set-Location $ProjectRoot
 
-# Fix git safe directory (prevents ownership errors)
+# Fix git safe directory
 git config --global --add safe.directory 'E:/WEB AND APP DEVELOPMENT/WebSites/Romuths Graphic Designing' 2>$null
 
 Write-Host ""
@@ -14,68 +14,30 @@ Write-Host "  Romuths Graphics - Publish New Works  " -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
-# ============================================================
-# STEP 1: Find new images not yet in projects.js
-# ============================================================
-$projectsContent = Get-Content $ProjectsFile -Raw
-
-$recentImages = Get-ChildItem "$ProjectRoot\works\recent" -File | Where-Object { $_.Extension -match '\.(jpg|jpeg|png|webp)$' }
-$showcaseImages = Get-ChildItem "$ProjectRoot\works\showcase" -File | Where-Object { $_.Extension -match '\.(jpg|jpeg|png|webp)$' }
-
-$newRecent = @()
-$newShowcase = @()
-
-foreach ($img in $recentImages) {
-    if ($projectsContent -notmatch [regex]::Escape($img.Name)) {
-        $newRecent += $img
-    }
-}
-foreach ($img in $showcaseImages) {
-    if ($projectsContent -notmatch [regex]::Escape($img.Name)) {
-        $newShowcase += $img
-    }
+# Define folders and their display categories
+$categoryMap = @{
+    "recent"       = @{ Name = "Graphic Design"; IsRecent = $true; IsFeatured = $false }
+    "showcase"     = @{ Name = "Graphic Design"; IsRecent = $false; IsFeatured = $true }
+    "branding"     = @{ Name = "Logo Design & Branding"; IsRecent = $false; IsFeatured = $false }
+    "ui-ux"        = @{ Name = "Web & UI/UX Design"; IsRecent = $false; IsFeatured = $false }
+    "print"        = @{ Name = "Print Design"; IsRecent = $false; IsFeatured = $false }
+    "illustration" = @{ Name = "Illustration"; IsRecent = $false; IsFeatured = $false }
+    "packaging"    = @{ Name = "Packaging Design"; IsRecent = $false; IsFeatured = $false }
+    "marketing"    = @{ Name = "Marketing Materials"; IsRecent = $false; IsFeatured = $false }
 }
 
-$totalNew = $newRecent.Count + $newShowcase.Count
-
-if ($totalNew -eq 0) {
-    Write-Host "No new images found. Checking if there are unpushed changes..." -ForegroundColor Yellow
-
-    $unpushed = git status --short
-    if ($unpushed) {
-        Write-Host "Found unpushed changes. Pushing to GitHub..." -ForegroundColor Cyan
-        git add .
-        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-        git commit -m "Sync update - $timestamp"
-        git push origin main
-        Write-Host ""
-        Write-Host "Pushed successfully!" -ForegroundColor Green
-    } else {
-        Write-Host "Everything is up to date!" -ForegroundColor Green
-    }
-    Write-Host ""
-    Read-Host "Press Enter to exit"
-    exit
-}
-
-Write-Host "Found $totalNew new image(s):" -ForegroundColor Green
-foreach ($img in $newRecent) { Write-Host "  [RECENT]   $($img.Name)" -ForegroundColor White }
-foreach ($img in $newShowcase) { Write-Host "  [SHOWCASE] $($img.Name)" -ForegroundColor White }
-Write-Host ""
-
 # ============================================================
-# STEP 2: Compress new images
+# STEP 1: Compress uncompressed images first
 # ============================================================
-Write-Host "--- Step 1/3: Compressing images ---" -ForegroundColor Cyan
+Write-Host "--- Step 1/3: Checking for uncompressed images ---" -ForegroundColor Cyan
 
 function Compress-Image {
     param([string]$InputPath, [int]$MaxWidth = 1920, [int]$Quality = 65)
     try {
         $originalSize = (Get-Item $InputPath).Length
-        if ($originalSize -lt 500KB) {
-            Write-Host "  SKIP (already small): $(Split-Path $InputPath -Leaf)" -ForegroundColor DarkGray
-            return
-        }
+        if ($originalSize -lt 600KB) { return } # Skip already small files
+        
+        Write-Host "  Compressing: $(Split-Path $InputPath -Leaf)..." -NoNewline
         $img = [System.Drawing.Image]::FromFile($InputPath)
         $ratio = if ($img.Width -gt $MaxWidth) { $MaxWidth / $img.Width } else { 1.0 }
         $newW = [int]($img.Width * $ratio)
@@ -102,21 +64,26 @@ function Compress-Image {
         Rename-Item $tmp -NewName (Split-Path $InputPath -Leaf) -Force
         $nz = (Get-Item $InputPath).Length
         $pct = [math]::Round((1 - $nz / $originalSize) * 100, 1)
-        Write-Host "  OK: $(Split-Path $InputPath -Leaf): $([math]::Round($originalSize/1KB,0))KB -> $([math]::Round($nz/1KB,0))KB (saved ${pct}%)" -ForegroundColor Green
+        Write-Host " OK ($([math]::Round($originalSize/1KB,0))KB -> $([math]::Round($nz/1KB,0))KB)" -ForegroundColor Green
     } catch {
-        Write-Host "  ERROR: $(Split-Path $InputPath -Leaf): $_" -ForegroundColor Red
+        Write-Host " ERROR: $_" -ForegroundColor Red
         if (Test-Path "$InputPath.tmp") { Remove-Item "$InputPath.tmp" -Force }
     }
 }
 
-foreach ($img in $newRecent) { Compress-Image -InputPath $img.FullName }
-foreach ($img in $newShowcase) { Compress-Image -InputPath $img.FullName }
+foreach ($folder in $categoryMap.Keys) {
+    if (Test-Path "$ProjectRoot\works\$folder") {
+        Get-ChildItem "$ProjectRoot\works\$folder" -File | Where-Object { $_.Extension -match '\.(jpg|jpeg|png|webp)$' } | ForEach-Object {
+            Compress-Image -InputPath $_.FullName
+        }
+    }
+}
 
 # ============================================================
-# STEP 3: Add new entries to projects.js
+# STEP 2: Rebuild projects.js with dimensions
 # ============================================================
 Write-Host ""
-Write-Host "--- Step 2/3: Adding to projects.js ---" -ForegroundColor Cyan
+Write-Host "--- Step 2/3: Generating projects.js with dimensions ---" -ForegroundColor Cyan
 
 function Get-TitleFromFilename {
     param([string]$Filename)
@@ -131,49 +98,81 @@ function Get-TitleFromFilename {
     return $titled
 }
 
-# Re-read the file in case it changed
-$projectsContent = Get-Content $ProjectsFile -Raw
-$newEntries = @()
+$allProjects = @()
 
-foreach ($img in $newRecent) {
-    $title = Get-TitleFromFilename $img.Name
-    $entry = "    {`n        title: `"$title`",`n        category: `"Graphic Design`",`n        image: `"works/recent/$($img.Name)`",`n        isRecent: true,`n        isFeatured: false`n    }"
-    $newEntries += $entry
-    Write-Host "  + [RECENT] $title" -ForegroundColor Green
+foreach ($folder in $categoryMap.Keys) {
+    if (-not (Test-Path "$ProjectRoot\works\$folder")) { continue }
+    
+    $images = Get-ChildItem "$ProjectRoot\works\$folder" -File | Where-Object { $_.Extension -match '\.(jpg|jpeg|png|webp)$' }
+    if ($images.Count -gt 0) { Write-Host "  Found $($images.Count) image(s) in works/$folder/" -ForegroundColor Gray }
+
+    foreach ($img in $images) {
+        try {
+            # Get dimensions
+            $bmp = New-Object System.Drawing.Bitmap($img.FullName)
+            $width = $bmp.Width
+            $height = $bmp.Height
+            $bmp.Dispose()
+
+            $title = Get-TitleFromFilename $img.Name
+            $catData = $categoryMap[$folder]
+
+            # Replace backslashes with forward slashes for webpaths
+            $webPath = "works/$folder/$($img.Name)" -replace "\\", "/"
+            
+            $isRecent = if ($catData.IsRecent) { "true" } else { "false" }
+            $isFeatured = if ($catData.IsFeatured) { "true" } else { "false" }
+            
+            # Format object
+            $entry = @"
+    {
+        title: "$title",
+        category: "$($catData.Name)",
+        folder: "$folder",
+        image: "$webPath",
+        width: $width,
+        height: $height,
+        isRecent: $isRecent,
+        isFeatured: $isFeatured,
+        featuredCategory: "$($catData.Name)"
+    }
+"@
+            $allProjects += $entry
+        } catch {
+            Write-Host "  Error processing $($img.Name): $_" -ForegroundColor Red
+        }
+    }
 }
 
-foreach ($img in $newShowcase) {
-    $title = Get-TitleFromFilename $img.Name
-    $entry = "    {`n        title: `"$title`",`n        category: `"Graphic Design`",`n        image: `"works/showcase/$($img.Name)`",`n        isRecent: false,`n        isFeatured: true,`n        featuredCategory: `"Graphic Design`"`n    }"
-    $newEntries += $entry
-    Write-Host "  + [SHOWCASE] $title" -ForegroundColor Green
-}
-
-if ($newEntries.Count -gt 0) {
-    $joined = ($newEntries -join ",`n") + ","
-    $projectsContent = $projectsContent -replace '\];(\s*)$', "$joined`n];`$1"
-    Set-Content -Path $ProjectsFile -Value $projectsContent -NoNewline
-    Write-Host ""
-    Write-Host "$($newEntries.Count) project(s) added to projects.js!" -ForegroundColor Green
-}
+$jsContent = "// Auto-generated by publish.ps1`nconst portfolioProjects = [`n" + ($allProjects -join ",`n") + "`n];`n"
+Set-Content -Path $ProjectsFile -Value $jsContent -Encoding UTF8
+Write-Host "  Successfully wrote $($allProjects.Count) projects to projects.js!" -ForegroundColor Green
 
 # ============================================================
-# STEP 4: Push everything to GitHub
+# STEP 3: Push everything to GitHub
 # ============================================================
 Write-Host ""
-Write-Host "--- Step 3/3: Pushing to GitHub ---" -ForegroundColor Cyan
+Write-Host "--- Step 3/3: Syncing and Pushing to GitHub ---" -ForegroundColor Cyan
+
+$status = git status --short
+if (-not $status) {
+    Write-Host "  Everything is up to date! No changes to push." -ForegroundColor Yellow
+    Write-Host ""
+    Read-Host "Press Enter to exit"
+    exit
+}
 
 git add .
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-git commit -m "Added $totalNew new project(s) - $timestamp"
+git commit -m "Auto-publish new works - $timestamp"
 git push origin main
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host ""
     Write-Host "========================================" -ForegroundColor Green
-    Write-Host "  SUCCESS! $totalNew new work(s) published!" -ForegroundColor Green
+    Write-Host "  SUCCESS! Website updated!" -ForegroundColor Green
     Write-Host "  Live at: https://romuthsgraphics.github.io/" -ForegroundColor Green
-    Write-Host "  (Wait 1-2 minutes for GitHub to update)" -ForegroundColor Yellow
+    Write-Host "  (Wait 1-2 minutes for GitHub to rebuild)" -ForegroundColor Yellow
     Write-Host "========================================" -ForegroundColor Green
 } else {
     Write-Host ""
